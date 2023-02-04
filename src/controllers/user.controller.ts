@@ -60,23 +60,23 @@ export const postLogin: Handler = async(req, res) => {
         const compare = await bcrypt.compare(password, users.password);
 
 
-        const token = jwt.sign({
+        const generatoken = jwt.sign({
             data: users
         }, '123456789', {
             expiresIn: 60 * 60 * 24
         }
         )
 
-        const info = compare ? token : 'Credenciales Falsos'
+        const token = compare ? generatoken : 'Credenciales Falsos'
 
         console.log('desepcriptado', compare);
 
-        console.log('token', info);
+        console.log('token', token);
         
 
 
 
-        res.json({info});
+        res.json({token});
 
 
 
