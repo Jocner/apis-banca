@@ -3,6 +3,7 @@ import cors from 'cors';
 import conectarDB from './config/db';
 import userRouter from './routes/users.routes';
 import destinatarioRouter from './routes/destinatario.routes';
+import bancoRouter from './routes/banco.routes';
 import swaggerUI from 'swagger-ui-express';
 import swaggerJsDocs from 'swagger-jsdoc';
 import { option } from './swaggerOptions';
@@ -21,7 +22,7 @@ app.use(express.json());
 
 const specs = swaggerJsDocs(option);
 
-app.use([userRouter, destinatarioRouter]);
+app.use([userRouter, destinatarioRouter, bancoRouter]);
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 

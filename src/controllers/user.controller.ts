@@ -55,10 +55,14 @@ export const postLogin: Handler = async(req, res) => {
 
 
         let users = await User.findOne({email: email}) as IUser;
-
-
+         
+        
         const compare = await bcrypt.compare(password, users.password);
 
+        // if(users) {
+        //     res.status(402).json({ msg: ''});
+        // } 
+        console.log(users);
 
         const generatoken = jwt.sign({
             data: users
@@ -67,7 +71,10 @@ export const postLogin: Handler = async(req, res) => {
         }
         )
 
-        const token = compare ? generatoken : 'Credenciales Falsos'
+
+        
+
+        const token = compare ? { message : 'SUCCESS', token: generatoken} : { msg : 'CREDENCIALES INVALIDOS', token: generatoken }  ;
 
         console.log('desepcriptado', compare);
 
@@ -81,7 +88,10 @@ export const postLogin: Handler = async(req, res) => {
 
 
     } catch(err) {
-        console.log(err);
+        console.log('ERROR DEL SERVICIO', err);
+        res.json({msg : 'ERROR DEL SERVICIO',
+            err});
+       
     }
 
     
