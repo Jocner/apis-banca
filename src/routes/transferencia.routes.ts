@@ -1,6 +1,6 @@
 import { Router } from 'express';
 const router = Router();
-import { postTransferencia } from '../controllers/tranferencia.controller';
+import { postTransferencia, getTransferencia } from '../controllers/tranferencia.controller';
 
 /**
  * @swagger
@@ -13,7 +13,7 @@ import { postTransferencia } from '../controllers/tranferencia.controller';
  * @swagger
  * /newTransferencia:
  *  post:
- *    summary: create a new destinatario
+ *    summary: create a new tranferencia
  *    tags: [Tranferencias]
  *    requestBody:
  *      required: true
@@ -34,6 +34,27 @@ import { postTransferencia } from '../controllers/tranferencia.controller';
  */
 router.post('/newTransferencia',
    postTransferencia
+);
+
+
+/**
+ * @swagger
+ * /transferencias:
+ *  get:
+ *    summary: Return a User list
+ *    tags: [Transferencias]
+ *    responses:
+ *      200:
+ *        description: list of transferencia
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                $ref: '#/components/schemas/Transferencia'      
+ */
+router.get('/transferencias', 
+   getTransferencia
 );
 
 export default router;

@@ -1,5 +1,4 @@
 import { Handler } from 'express';
-// import Transferencia, { ITransferencia } from '../models/transferencia';
 import Transferencia from '../models/transferencia';
 import * as dotenv from 'dotenv';
 
@@ -12,12 +11,7 @@ export const postTransferencia: Handler = async(req, res) => {
         const { email, rut, nombre, telefono, cuenta, bancodestino, monto } = req.body;
 
 
-        // let destinatario = await Transferencia.findOne({rut: rut}) as ITransferencia;
-        
 
-        // if(destinatario) {
-        //     res.status(402).json({ msg: 'destinatario registrado'});
-        // } 
 
         if(!email || !rut || !nombre || !telefono || !cuenta || !bancodestino || !monto) {
             console.log("req vacia", email);
@@ -40,4 +34,22 @@ export const postTransferencia: Handler = async(req, res) => {
     }
 
     
+};
+
+
+export const getTransferencia: Handler = async(req, res) => {
+    try {
+
+        const transferencia = await Transferencia.find();
+
+        const transacion = transferencia ? transferencia : 'error en servidor';
+
+        res.json({transacion});
+
+
+    }catch(err) {
+
+        console.log(err);
+
+    }
 };
