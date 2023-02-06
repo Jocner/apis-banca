@@ -1,16 +1,15 @@
 import { Schema, model, Document } from 'mongoose';
 
 
-const usersSchema = new Schema({
-    nombre: {
+const transferenciasSchema = new Schema({
+    rut: {
         type: String,
         required: true,
         trim: true
     },
-    rut: {
+    nombre: {
         type: String,
         required: true,
-        unique: true,
         trim: true
     },
     email: {
@@ -18,22 +17,42 @@ const usersSchema = new Schema({
         required: true,
         trim: true
     },
-    password: {
+    telefono: {
+        type: String,
+        require: true,
+        trim: true
+    },
+    cuenta: {
+        type: String,
+        require: true,
+        trim: true
+    },
+    bancodestino: {
+        type: String,
+        require: true,
+        trim: true
+    },
+    monto: {
         type: String,
         require: true,
         trim: true
     }
+
+    
 });
 
 
 
-export interface IUser extends Document {
-    nombre: string;
+export interface ITransferencia extends Document {
     rut: string;
+    nombre: string;
     email: string;
-    password: string;
+    telefono: string;
+    cuenta: string;
+    bancodestino: string;
+    monto: string;
 }
 
 
 
-export default model<IUser>('user', usersSchema);
+export default model<ITransferencia>('Tranferencia', transferenciasSchema);
